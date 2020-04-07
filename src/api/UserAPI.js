@@ -11,6 +11,7 @@ const login = (userObject) => {
 }
 
 const signup = (userObject) => {
+  console.log(userObject)
   return fetch (`${url}api/users/`, {
     headers: {
       'Content-Type': 'application/json'

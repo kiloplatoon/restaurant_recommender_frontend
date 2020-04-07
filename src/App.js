@@ -14,6 +14,7 @@ import UserForm from './components/UserForm';
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
+  const [token, setToken] = useState(null)
 
 
   useEffect(() => {
@@ -22,12 +23,14 @@ const App = () => {
 
   const getLoggedInUser = async () => {
     let token = localStorage.getItem('dinnr-token')
+    console.log(token)
     if (token !== 'null' && token !== 'undefined') {
       console.log('token: ', token)
       let res = await UserAPI.getLoggedInUser(token)
       let data = await res.json()
       setIsLoggedIn(true)
       setUser(data)
+      console.log(data)
     } else {
       setIsLoggedIn(false)
       setUser(null)
@@ -36,6 +39,8 @@ const App = () => {
 
   const handleLogin = async evt => {
     evt.preventDefault()
+    console.log(evt.target.email.value)
+    console.log(evt.target.password.value)
     let user = {
       email : evt.target.email.value,
       password : evt.target.password.value
@@ -45,6 +50,7 @@ const App = () => {
     if (res.token !== undefined && res.token !== null) {
       localStorage.setItem('dinnr-token', res.token)
       setUser(res.user)
+      setToken(res.token)
       setIsLoggedIn(true)
       alert('Successfully Logged In!')
     } else {
@@ -113,6 +119,7 @@ const App = () => {
       <Profile
       isLoggedIn={isLoggedIn}
       user={user}
+      token={token}
       handleLogout={handleLogout}
       />
     )
@@ -132,7 +139,7 @@ const App = () => {
         <Route exact path='/login' render={renderLogin} />
         <Route exact path='/signup' render={renderSignup} />
         <Route exact path='/partners' component={UserForm} />
-        <Route exact path='/profile' component={renderProfile} />
+        <Route exact path='/profile' render={renderProfile} />
       </Router>
       </div>
     </div>

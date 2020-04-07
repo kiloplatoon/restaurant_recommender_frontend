@@ -4,17 +4,17 @@ import Button from 'react-bootstrap/Button'
 
 
 const Profile = (props) => {
-  
+  console.log(props)
   const user = {
     first_name: 'Bob',
     last_name: 'Frank',
     email: 'bobbyfrank@email.com',
     username: 'bobbyfrankie',
-    firends: ['Sammy', 'George', 'Sarah']
+    friends: ['Sammy', 'George', 'Sarah']
   }
 
   const renderFriends = () => {
-    return <p>{user.firends}</p>
+    return <p>{user.friends}</p>
   }
 
   return (
