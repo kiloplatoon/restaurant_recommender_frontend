@@ -7,11 +7,6 @@ class Main extends Component {
   state = {
     apiData: []
   }
-  // https://api.yelp.com/v3/businesses/search?location=${zip}
-  // headers: {
-  //   'Authorization': `Bearer ${API_KEY}`
-  // },
-  // method: 'GET',
 
   getRestaurants = async evt => {
     evt.preventDefault()
