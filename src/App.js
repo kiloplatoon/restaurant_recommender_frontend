@@ -7,8 +7,9 @@ import UserAPI from './api/UserAPI'
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Main from './pages/Main'
 import NavComponent from './components/NavComponent'
-import UserForm from './components/UserForm';
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -120,7 +121,7 @@ const App = () => {
         <Route exact path='/home' render={renderHome} />
         <Route exact path='/login' render={renderLogin} />
         <Route exact path='/signup' render={renderSignup} />
-        <Route exact path='/partners' component={UserForm} />
+        <Route exact path='/start' component={Main} />
       </Router>
       </div>
     </div>

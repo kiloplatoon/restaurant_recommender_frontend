@@ -3,8 +3,7 @@ body {
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
   background-image: url('images/background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-size: fill;
 }
 
 .App {
@@ -36,6 +35,11 @@ body {
 
 #brand {
   font-size: 10rem;
+  font-family: 'Rochester', cursive;
+}
+
+.h1 {
+  font-size: 3em;
   font-family: 'Rochester', cursive;
 }
 
