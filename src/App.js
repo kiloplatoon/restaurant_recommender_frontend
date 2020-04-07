@@ -7,6 +7,7 @@ import UserAPI from './api/UserAPI'
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Profile from './pages/Profile'
 import NavComponent from './components/NavComponent'
 import UserForm from './components/UserForm';
 
@@ -104,6 +105,16 @@ const App = () => {
     )
   }
 
+  const renderProfile = () => {
+    return(
+      <Profile
+      isLoggedIn={isLoggedIn}
+      user={user}
+      handleLogout={handleLogout}
+      />
+    )
+  }
+
   return (
     <div className="App">
       <div className='container-fluid' id='appBG'>
@@ -118,6 +129,7 @@ const App = () => {
         <Route exact path='/login' render={renderLogin} />
         <Route exact path='/signup' render={renderSignup} />
         <Route exact path='/partners' component={UserForm} />
+        <Route exact path='/profile' component={renderProfile} />
       </Router>
       </div>
     </div>
