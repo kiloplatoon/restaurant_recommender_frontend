@@ -1,7 +1,7 @@
 const url = 'http://localhost:8000/'
 
 const login = (userObject) => {
-  return fetch (`${url}token-auth/`, {
+  return fetch (`${url}api/auth/login/`, {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -21,7 +21,7 @@ const signup = (userObject) => {
 }
 
 const getLoggedInUser = (token) => {
-  return fetch(`${url}api/current_user/`, {
+  return fetch(`${url}api/auth/user`, {
     header: {
       'Content-Type': 'application/json',
       Authorization: `JWT ${token}`

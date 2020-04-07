@@ -36,7 +36,7 @@ const App = () => {
   const handleLogin = async evt => {
     evt.preventDefault()
     let user = {
-      username : evt.target.username.value,
+      email : evt.target.email.value,
       password : evt.target.password.value
     }
     let res = await UserAPI.login(user)
@@ -47,15 +47,18 @@ const App = () => {
       setIsLoggedIn(true)
       alert('Successfully Logged In!')
     } else {
-      alert('Invalid Username or Password')
+      alert('Invalid Email or Password')
     }
   }
 
   const handleSignup = async evt => {
     evt.preventDefault()
     let user = {
-      username: evt.target.username.value,
+      email: evt.target.email.value,
+      first_name: evt.target.first_name.value,
+      last_name: evt.target.last_name.value,
       password: evt.target.password.value,
+      // confirm_password: evt.target.password.value
     }
     let response = await UserAPI.signup(user)
     setIsLoggedIn(true)
