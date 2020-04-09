@@ -15,6 +15,10 @@ const Signup = (props) => {
       <div className='authForm'>
         <h3>Sign Up</h3>
         <Form className='container' style={{textAlign: 'left'}} onSubmit={props.handleSignup}>
+          <Form.Group controlId='username'>
+            <Form.Label>Username</Form.Label>
+            <Form.Control required type='username' placeholder='Username' />
+          </Form.Group>
           <Form.Group controlId='email'>
             <Form.Label>Email</Form.Label>
             <Form.Control required type='email' placeholder='user@email.com' />
@@ -33,10 +37,6 @@ const Signup = (props) => {
             <Form.Label>Password</Form.Label>
             <Form.Control required type='password' placeholder='Password' />
           </Form.Group>
-          {/* <Form.Group controlId='password'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control required type='password' placeholder='Password' />
-          </Form.Group> */}
           <Button style={{marginTop: '1rem'}} className='btn btn-dark' type='submit'>Submit</Button>
         </Form>
       </div>

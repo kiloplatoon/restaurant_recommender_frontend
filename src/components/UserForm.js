@@ -1,26 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col'
 
-const UserForm = () => {
+const UserForm = (props) => {
   return (
     <div>
       <div className='authForm'>
-        <Form style={{textAlign: 'left'}}>
-          <Form.Row>
-            <Form.Group as={Col} controlId="user1">
-              <Form.Label>User 1</Form.Label>
-              <Form.Control type="text" placeholder="John" />
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="user2">
-              <Form.Label>User 2</Form.Label>
-              <Form.Control type="text" placeholder="Jane" />
-            </Form.Group>
-          </Form.Row>
-
+        <Form style={{textAlign: 'left'}} onSubmit={props.getRestaurants}>
+          <h1 className='h1'>Where should we search?</h1>
           <Form.Group controlId="zipcode">
             <Form.Label>Zipcode</Form.Label>
             <Form.Control type='text' placeholder="60603" />

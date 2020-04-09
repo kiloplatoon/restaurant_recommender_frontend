@@ -21,7 +21,7 @@ const Home = (props) => {
           <h1 id='brand'>Dinnr</h1>
         </div>
         <div>
-          <Button className='btn btn-dark'><Link to='/partners' style={{color: '#fff'}}>Begin</Link></Button>
+          <Button className='btn btn-dark'><Link to='/start' style={{color: '#fff'}}>Begin</Link></Button>
         </div>
       </div>
     }

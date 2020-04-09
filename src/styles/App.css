@@ -1,0 +1,79 @@
+body {
+  display: block;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  /* position: fixed; */
+  /* overflow: hidden; */
+
+}
+
+#root{
+  background-image: url('../images/background.jpg');
+  position: relative;
+  /* overflow: hidden; */
+  width: 100%;
+  height: 100%;
+  cursor: url("https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png")
+      39 39, auto;
+}
+
+.App {
+  text-align: center;  
+}
+
+#navbar {
+  background: transparent;
+}
+
+
+.navlink {
+  color: #ffffff;
+  float: right;
+  padding-right: 1rem;
+}
+
+.authForm {
+  margin-top: 15vh;
+  background-color: #222222a6;
+  display: inline-block;
+  width: 50%;
+  padding: 2rem;
+}
+
+#card {
+  height: 500px !important;
+  margin-top: 5vh;
+  background-color: #222222a6 !important;
+  display: inline-block;
+  padding: 2rem;
+}
+
+#img {
+  height: 380px !important;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#welcome {
+  font-size: 1rem;
+}
+
+#brand {
+  font-size: 10rem;
+  font-family: 'Rochester', cursive;
+}
+
+.h1 {
+  font-size: 3em;
+  font-family: 'Rochester', cursive;
+}
+
+#baseComp {
+  padding: 1rem;
+  margin-top: 15vh;
+}
+
