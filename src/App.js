@@ -8,8 +8,11 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile'
+import EditProfile from './pages/EditProfile'
 import NavComponent from './components/NavComponent'
 import UserForm from './components/UserForm';
+import ProfileMenu from './components/ProfileMenu'
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -39,8 +42,6 @@ const App = () => {
 
   const handleLogin = async evt => {
     evt.preventDefault()
-    console.log(evt.target.email.value)
-    console.log(evt.target.password.value)
     let user = {
       email : evt.target.email.value,
       password : evt.target.password.value
@@ -70,6 +71,7 @@ const App = () => {
     let response = await UserAPI.signup(user)
     setIsLoggedIn(true)
     setUser(response.user)
+    setToken(response.token)
     localStorage.setItem('dinnr-token', response.token)
     alert('Successfully created a new account!')
   }
@@ -78,6 +80,7 @@ const App = () => {
     setIsLoggedIn(false)
     setUser(null)
     localStorage.setItem('dinnr-token', null)
+    localStorage.clear()
     alert('Logged Out')
     return <Redirect to='/login' />
   }  
@@ -125,6 +128,18 @@ const App = () => {
     )
   }
 
+  const renderEditProfile = () => {
+    return(
+      <EditProfile
+      isLoggedIn={isLoggedIn}
+      user={user}
+      token={token}
+      handleSignup={handleSignup}
+      handleLogout={handleLogout}
+      />
+    )
+  }
+
   return (
     <div className="App">
       <div className='container-fluid' id='appBG'>
@@ -135,11 +150,13 @@ const App = () => {
           handleLogout={handleLogout}
           />
         </div>
+        <ProfileMenu user={user}/>
         <Route exact path='/home' render={renderHome} />
         <Route exact path='/login' render={renderLogin} />
         <Route exact path='/signup' render={renderSignup} />
         <Route exact path='/partners' component={UserForm} />
         <Route exact path='/profile' render={renderProfile} />
+        <Route exact path='/editprofile' render={renderEditProfile} />
       </Router>
       </div>
     </div>

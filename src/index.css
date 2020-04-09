@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#profile-menu {
+  position: absolute;
+  right: 20px;
+  top: -35px;
+  background-color: #404854;
+  border-color: #272b30;
+}
+
+#profile-items {
+  color: white;
+  background-color: #404854;
+}
+
+#profile-link {
+  color: white;
+  padding-left: 5px;
+}

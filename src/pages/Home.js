@@ -23,6 +23,9 @@ const Home = (props) => {
         <div>
           <Button className='btn btn-dark'><Link to='/partners' style={{color: '#fff'}}>Begin</Link></Button>
         </div>
+        <div>
+          <Button className='btn btn-dark'><Link to='/profile' style={{color: '#fff'}}>Profile</Link></Button>
+        </div>
       </div>
     }
     </div>

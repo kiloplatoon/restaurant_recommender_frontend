@@ -2,7 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 
 
 // Fake User object for testing
@@ -29,7 +29,7 @@ const userProfile = {
 
 
 
-const Profile = (props) => {
+const EditProfile = (props) => {
   let user
   if (props.token) {
     user = props.user
@@ -49,7 +49,8 @@ const Profile = (props) => {
 
   const handleEditClick = async (evt) => {
     evt.preventDefault()
-    console.log('Go to EDIT PROFILE page')
+    console.log('Todo: SEND DATA TO BACKEND AND RETURN TO PROFILE PAGE')
+    
   }
 
 
@@ -65,20 +66,23 @@ const Profile = (props) => {
         <Form className='container' style={{textAlign: 'left'}} onSubmit={handleEditClick}>
           <Form.Row>
             <Form.Group as={Col} controlId='first_name'>
-              <Form.Label>First name: {user.first_name}</Form.Label>
+              <Form.Label>First name: </Form.Label>
+              <Form.Control type='text' placeholder={user.first_name} />
             </Form.Group>
             <Form.Group as={Col} controlId='last_name'>
-              <Form.Label>Last name: {user.last_name}</Form.Label>
+              <Form.Label>Last name: </Form.Label>
+              <Form.Control type='text' placeholder={user.last_name} />
             </Form.Group>
           </Form.Row>
           <Form.Group controlId='phonenumber'>
-            <Form.Label>Phone number: {userProfile.phone_number}</Form.Label>
+            <Form.Label>Phone number: </Form.Label>
+            <Form.Control type='text' placeholder={userProfile.phone_number} />
           </Form.Group>
           <Form.Group controlId='friends'>
             <Form.Label>Friends</Form.Label>
             <div>{renderFriends()}</div>
           </Form.Group>
-          <Button style={{marginTop: '1rem'}} className='btn btn-dark' type='submit'><Link id='profile-link' to="/editprofile">Edit</Link></Button>
+          <Button style={{marginTop: '1rem'}} className='btn btn-dark' type='submit'>Submit</Button>
         </Form>
       </div>
     }
@@ -86,4 +90,4 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+export default EditProfile;

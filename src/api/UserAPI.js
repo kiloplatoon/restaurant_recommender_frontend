@@ -12,7 +12,15 @@ const login = (userObject) => {
 
 const signup = (userObject) => {
   console.log(userObject)
-  return fetch (`${url}api/users/`, {
+  fetch (`${url}api/users/`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(userObject)
+  }).then(resp => resp.json())
+  
+  return fetch (`${url}api/auth/login/`, {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -31,5 +39,5 @@ const getLoggedInUser = (token) => {
 }
 
 export default {
-  login, getLoggedInUser, signup,
+  login, signup, getLoggedInUser,
 }
