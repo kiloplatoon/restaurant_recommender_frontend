@@ -21,7 +21,7 @@ const signup = (userObject) => {
 }
 
 const getLoggedInUser = (token) => {
-  return fetch(`${url}api/auth/user`, {
+  return fetch(`${url}api/auth/user/`, {
     header: {
       'Content-Type': 'application/json',
       Authorization: `JWT ${token}`

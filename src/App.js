@@ -108,6 +108,17 @@ const App = () => {
     )
   }
 
+  const renderMain = () => {
+    return(
+      <Main 
+      isLoggedIn={isLoggedIn}
+      user={user}
+      handleLogout={handleLogout}
+      getLoggedInUser={getLoggedInUser}
+      />
+    )
+  }
+
   return (
     <div className="App">
       <div className='container-fluid' id='appBG'>
@@ -121,7 +132,7 @@ const App = () => {
         <Route exact path='/home' render={renderHome} />
         <Route exact path='/login' render={renderLogin} />
         <Route exact path='/signup' render={renderSignup} />
-        <Route exact path='/start' component={Main} />
+        <Route exact path='/start' render={renderMain} />
       </Router>
       </div>
     </div>
