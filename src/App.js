@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import './App.css'
+import './styles/App.css'
 import UserAPI from './api/UserAPI'
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -37,7 +37,7 @@ const App = () => {
   const handleLogin = async evt => {
     evt.preventDefault()
     let user = {
-      email : evt.target.email.value,
+      username : evt.target.username.value,
       password : evt.target.password.value
     }
     let res = await UserAPI.login(user)
@@ -55,6 +55,7 @@ const App = () => {
   const handleSignup = async evt => {
     evt.preventDefault()
     let user = {
+      username: evt.target.username.value,
       email: evt.target.email.value,
       first_name: evt.target.first_name.value,
       last_name: evt.target.last_name.value,
