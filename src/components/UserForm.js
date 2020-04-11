@@ -12,7 +12,7 @@ const UserForm = (props) => {
             <Form.Label>Zipcode</Form.Label>
             <Form.Control type='text' placeholder="60603" />
           </Form.Group>
-          <Button className='btn btn-dark'>Submit</Button>
+          <Button className='btn btn-dark' type='submit'>Submit</Button>
         </Form>
       </div>
     </div>
