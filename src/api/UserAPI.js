@@ -1,43 +1,116 @@
 const url = 'http://localhost:8000/'
 
 const login = (userObject) => {
-  return fetch (`${url}api/auth/login/`, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
+  console.log(userObject)
+  var myHeaders = new Headers();
+
+  var formdata = new FormData();
+  formdata.append("username", userObject.email);
+  formdata.append("password", userObject.password);
+
+  var requestOptions = {
     method: 'POST',
-    body: JSON.stringify(userObject)
-  }).then(resp => resp.json())
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  };
+
+  return fetch("http://127.0.0.1:8000/api/auth/login/", requestOptions)
+    .then(response => response.json())
+    .then(result => result)
+    .catch(error => console.log('error', error));
 }
 
 const signup = (userObject) => {
+  var myHeaders = new Headers();
   console.log(userObject)
-  fetch (`${url}api/users/`, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
+  var formdata = new FormData();
+  formdata.append("username", userObject.username);
+  formdata.append("email", userObject.email);
+  formdata.append("first_name", userObject.first_name);
+  formdata.append("last_name", userObject.last_name);
+  formdata.append("password", userObject.password);
+
+  var requestOptions = {
     method: 'POST',
-    body: JSON.stringify(userObject)
-  }).then(resp => resp.json())
-  
-  return fetch (`${url}api/auth/login/`, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify(userObject)
-  }).then(resp => resp.json())
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  };
+
+  return fetch("http://127.0.0.1:8000/api/auth/signup/", requestOptions)
+  .then(response => response.json())
+  .then(result => result)
+  .catch(error => console.log('error', error));
+
 }
 
 const getLoggedInUser = (token) => {
-  return fetch(`${url}api/auth/user`, {
+  return fetch(`${url}api/auth/profiles`, {
     header: {
       'Content-Type': 'application/json',
-      Authorization: `JWT ${token}`
+      Authorization: token
     }
   })
 }
 
+// GET ALL USERPROFILES
+const getProfiles = () => {
+  let myHeaders = new Headers()
+  return fetch(`${url}api/auth/profiles/`, {
+    header: {
+      'Content-Type': 'application/json',
+    }
+  })
+  .then(response => response.json())
+  .then(result => result)
+  .catch(error => console.log('error', error));
+}
+
+// EDIT USER PROFILE
+const editProfile = (userObject, token) => {
+  console.log(userObject)
+  console.log(token)
+  
+  var formdata = new FormData();
+  formdata.append("username", userObject.username);
+  formdata.append("email", userObject.email);
+  formdata.append("first_name", userObject.first_name);
+  formdata.append("last_name", userObject.last_name);
+  formdata.append("user", userObject.id);
+  formdata.append("phone_number", userObject.phone_number);
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${token}`);
+
+
+  var requestOptions = {
+    method: 'PUT',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  };
+
+  fetch(`${url}api/auth/profile/${userObject.id}/`, requestOptions)
+    .then(response => response.json())
+    .then(result => (result))
+    .catch(error => console.log('error', error));
+  
+
+  // var requestOptions = {
+  //   method: 'POST',
+  //   headers: myHeaders,
+  //   body: formdata,
+  //   redirect: 'follow'
+  // };
+
+  // return fetch("http://127.0.0.1:8000/api/auth/signup/", requestOptions)
+  // .then(response => response.json())
+  // .then(result => result)
+  // .catch(error => console.log('error', error));
+  console.log(formdata)
+}
+
 export default {
-  login, signup, getLoggedInUser,
+  login, signup, getLoggedInUser, editProfile, getProfiles
 }

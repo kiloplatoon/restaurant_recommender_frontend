@@ -15,8 +15,8 @@ const Login = (props) => {
         <h3>Login</h3>
         <Form className='container' style={{textAlign: 'left'}} onSubmit={props.handleLogin}>
           <Form.Group controlId='email'>
-            <Form.Label>Email</Form.Label>
-            <Form.Control required type='email' placeholder='user@email.com' />
+            <Form.Label>Username</Form.Label>
+            <Form.Control required type='text' placeholder='username123' />
           </Form.Group>
           <Form.Group controlId='password'>
             <Form.Label>Password</Form.Label>

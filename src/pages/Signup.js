@@ -19,6 +19,10 @@ const Signup = (props) => {
             <Form.Label>Email</Form.Label>
             <Form.Control required type='email' placeholder='user@email.com' />
           </Form.Group>
+          <Form.Group controlId='username'>
+            <Form.Label>Username</Form.Label>
+            <Form.Control required type='username' placeholder='user123' />
+          </Form.Group>
           <Form.Row>
             <Form.Group as={Col} controlId='first_name'>
               <Form.Label>First Name</Form.Label>

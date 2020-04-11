@@ -13,6 +13,7 @@ import NavComponent from './components/NavComponent'
 import UserForm from './components/UserForm';
 import ProfileMenu from './components/ProfileMenu'
 
+import Main from './pages/Main'
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -47,7 +48,8 @@ const App = () => {
       password : evt.target.password.value
     }
     let res = await UserAPI.login(user)
-    console.log(res.token !== undefined)
+    //console.log(res)
+    //console.log(res.token !== undefined)
     if (res.token !== undefined && res.token !== null) {
       localStorage.setItem('dinnr-token', res.token)
       setUser(res.user)
@@ -62,6 +64,7 @@ const App = () => {
   const handleSignup = async evt => {
     evt.preventDefault()
     let user = {
+      username: evt.target.username.value,
       email: evt.target.email.value,
       first_name: evt.target.first_name.value,
       last_name: evt.target.last_name.value,
@@ -69,6 +72,7 @@ const App = () => {
       // confirm_password: evt.target.password.value
     }
     let response = await UserAPI.signup(user)
+    console.log(response)
     setIsLoggedIn(true)
     setUser(response.user)
     setToken(response.token)
@@ -136,30 +140,51 @@ const App = () => {
       token={token}
       handleSignup={handleSignup}
       handleLogout={handleLogout}
+      UserAPI={UserAPI}
+      />
+    )
+  }
+
+  const renderMain = () => {
+    return(
+      <Main 
+      isLoggedIn={isLoggedIn}
+      user={user}
+      handleLogout={handleLogout}
+      getLoggedInUser={getLoggedInUser}
       />
     )
   }
 
   return (
-    <div className="App">
-      <div className='container-fluid' id='appBG'>
-      <Router>
-        <div>
-          <NavComponent 
-          isLoggedIn={isLoggedIn}
-          handleLogout={handleLogout}
-          />
+    <>
+    {
+      // !isLoggedIn 
+      // ?
+      // <Redirect to='/login' /> 
+      // :  
+      <div className="App">
+        <div className='container-fluid' id='appBG'>
+          <Router>
+            <div>
+              <NavComponent 
+              isLoggedIn={isLoggedIn}
+              handleLogout={handleLogout}
+              />
+            </div>
+            <ProfileMenu user={user}/>
+            <Route exact path='/home' render={renderHome} />
+            <Route exact path='/login' render={renderLogin} />
+            <Route exact path='/signup' render={renderSignup} />
+            <Route exact path='/partners' component={UserForm} />
+            <Route exact path='/profile' render={renderProfile} />
+            <Route exact path='/editprofile' render={renderEditProfile} />
+            <Route exact path='/start' render={renderMain} />
+          </Router>
         </div>
-        <ProfileMenu user={user}/>
-        <Route exact path='/home' render={renderHome} />
-        <Route exact path='/login' render={renderLogin} />
-        <Route exact path='/signup' render={renderSignup} />
-        <Route exact path='/partners' component={UserForm} />
-        <Route exact path='/profile' render={renderProfile} />
-        <Route exact path='/editprofile' render={renderEditProfile} />
-      </Router>
       </div>
-    </div>
+    }
+    </>
   );
 }
 

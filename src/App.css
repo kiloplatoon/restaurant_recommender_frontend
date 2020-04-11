@@ -2,9 +2,14 @@ body {
   display: block;
   color: #ffffff;
   font-family: 'Roboto', sans-serif;
-  background-image: url('images/background.jpg');
-  background-repeat: no-repeat;
+  background-image: url('./images/background2.jpg');
+  min-height: 100%;
+  background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* cursor: url("https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png")
+      39 39, auto; */
 }
 
 .App {

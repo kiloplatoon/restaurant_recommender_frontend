@@ -2,8 +2,9 @@ import React from 'react';
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { Avatar } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 // Fake User object for testing
 const fakeuser = {
@@ -26,10 +27,32 @@ const userProfile = {
 }
 
 
-
+// for material-ui
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+    position: "absolute",
+    
+  },
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+}));
 
 
 const Profile = (props) => {
+
+  const classes = useStyles();
+
+
   let user
   if (props.token) {
     user = props.user
@@ -56,12 +79,12 @@ const Profile = (props) => {
   return (
     <>
     {
-      // props.isLoggedIn
-      // ?
-      // <Redirect to='/home' />
-      // :
+      !props.isLoggedIn 
+      ?
+      <Redirect to='/login' /> 
+      :  
       <div className='authForm'>
-        <h3>{user.email}</h3>
+        <h3>{user.username} <Avatar id='profile-image' className={classes.large} >{`${user.first_name[0]} ${user.last_name[0]}`}</Avatar> </h3>
         <Form className='container' style={{textAlign: 'left'}} onSubmit={handleEditClick}>
           <Form.Row>
             <Form.Group as={Col} controlId='first_name'>

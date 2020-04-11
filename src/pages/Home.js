@@ -15,16 +15,13 @@ const Home = (props) => {
       :  
       <div className='container' id='baseComp'>
         <div>
-        <h4 id='welcome'>Welcome {props.email}</h4>
+        <h4 id='welcome'>Welcome {props.username}</h4>
         </div>
         <div>
           <h1 id='brand'>Dinnr</h1>
         </div>
         <div>
-          <Button className='btn btn-dark'><Link to='/partners' style={{color: '#fff'}}>Begin</Link></Button>
-        </div>
-        <div>
-          <Button className='btn btn-dark'><Link to='/profile' style={{color: '#fff'}}>Profile</Link></Button>
+          <Button className='btn btn-dark'><Link to='/start' style={{color: '#fff'}}>Begin</Link></Button>
         </div>
       </div>
     }
