@@ -44,6 +44,7 @@ body {
 
 #card {
   height: 500px !important;
+  width: 150px;
   margin-top: 5vh;
   background-color: #222222a6 !important;
   display: inline-block;
@@ -52,7 +53,7 @@ body {
 }
 
 #img {
-  height: 320px !important;
+  height: 280px !important;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -75,4 +76,3 @@ body {
   padding: 1rem;
   margin-top: 15vh;
 }
-
