@@ -39,8 +39,6 @@ const App = () => {
 
   const handleLogin = async evt => {
     evt.preventDefault()
-    console.log(evt.target.email.value)
-    console.log(evt.target.password.value)
     let user = {
       username : evt.target.username.value,
       password : evt.target.password.value

@@ -15,7 +15,7 @@ const Home = (props) => {
       :  
       <div className='container' id='baseComp'>
         <div>
-        <h4 id='welcome'>Welcome {props.email}</h4>
+        <h4 id='welcome'>Welcome {props.username}</h4>
         </div>
         <div>
           <h1 id='brand'>Dinnr</h1>
