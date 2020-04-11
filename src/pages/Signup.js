@@ -37,10 +37,6 @@ const Signup = (props) => {
             <Form.Label>Password</Form.Label>
             <Form.Control required type='password' placeholder='Password' />
           </Form.Group>
-          {/* <Form.Group controlId='password'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control required type='password' placeholder='Password' />
-          </Form.Group> */}
           <Button style={{marginTop: '1rem'}} className='btn btn-dark' type='submit'>Submit</Button>
         </Form>
       </div>

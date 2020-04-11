@@ -5,7 +5,7 @@ const login = (userObject) => {
   var myHeaders = new Headers();
 
   var formdata = new FormData();
-  formdata.append("username", userObject.email);
+  formdata.append("username", userObject.username);
   formdata.append("password", userObject.password);
 
   var requestOptions = {
@@ -46,6 +46,7 @@ const signup = (userObject) => {
 }
 
 const getLoggedInUser = (token) => {
+
   return fetch(`${url}api/auth/profiles`, {
     header: {
       'Content-Type': 'application/json',

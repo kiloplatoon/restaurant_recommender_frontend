@@ -2,18 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import './App.css'
+import './styles/App.css'
 import UserAPI from './api/UserAPI'
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+
 import Profile from './pages/Profile'
 import EditProfile from './pages/EditProfile'
-import NavComponent from './components/NavComponent'
 import UserForm from './components/UserForm';
 import ProfileMenu from './components/ProfileMenu'
 
 import Main from './pages/Main'
+
+import NavComponent from './components/NavComponent'
+
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -44,7 +48,7 @@ const App = () => {
   const handleLogin = async evt => {
     evt.preventDefault()
     let user = {
-      email : evt.target.email.value,
+      username : evt.target.username.value,
       password : evt.target.password.value
     }
     let res = await UserAPI.login(user)
@@ -121,13 +125,13 @@ const App = () => {
     )
   }
 
-  const renderProfile = () => {
+  const renderMain = () => {
     return(
-      <Profile
+      <Main 
       isLoggedIn={isLoggedIn}
       user={user}
-      token={token}
       handleLogout={handleLogout}
+      getLoggedInUser={getLoggedInUser}
       />
     )
   }
@@ -145,13 +149,15 @@ const App = () => {
     )
   }
 
-  const renderMain = () => {
+  const renderProfile = () => {
     return(
-      <Main 
+      <Profile
       isLoggedIn={isLoggedIn}
       user={user}
+      token={token}
+      handleSignup={handleSignup}
       handleLogout={handleLogout}
-      getLoggedInUser={getLoggedInUser}
+      UserAPI={UserAPI}
       />
     )
   }
