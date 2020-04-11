@@ -73,13 +73,16 @@ const editProfile = (userObject, token) => {
   console.log(userObject)
   console.log(token)
   
-  var formdata = new FormData();
-  formdata.append("username", userObject.username);
-  formdata.append("email", userObject.email);
-  formdata.append("first_name", userObject.first_name);
-  formdata.append("last_name", userObject.last_name);
-  formdata.append("user", userObject.id);
-  formdata.append("phone_number", userObject.phone_number);
+  var userFormdata = new FormData();
+  userFormdata.append('id', userObject.id)
+  userFormdata.append("username", userObject.username);
+  userFormdata.append("email", userObject.email);
+  userFormdata.append("first_name", userObject.first_name);
+  userFormdata.append("last_name", userObject.last_name);
+  userFormdata.append("user", userObject.id);
+
+  let profileFormdata = new FormData();
+  profileFormdata.append("phone_number", userObject.phone_number);
 
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${token}`);
@@ -88,14 +91,14 @@ const editProfile = (userObject, token) => {
   var requestOptions = {
     method: 'PUT',
     headers: myHeaders,
-    body: formdata,
+    body: userFormdata,
     redirect: 'follow'
   };
 
-  fetch(`${url}api/auth/profile/${userObject.id}/`, requestOptions)
-    .then(response => response.json())
-    .then(result => (result))
-    .catch(error => console.log('error', error));
+  // fetch(`${url}api/auth/profile/${userObject.id}/`, requestOptions)
+  //   .then(response => response.json())
+  //   .then(result => (result))
+  //   .catch(error => console.log('error', error));
   
 
   // var requestOptions = {
@@ -109,7 +112,7 @@ const editProfile = (userObject, token) => {
   // .then(response => response.json())
   // .then(result => result)
   // .catch(error => console.log('error', error));
-  console.log(formdata)
+  console.log(userFormdata)
 }
 
 export default {

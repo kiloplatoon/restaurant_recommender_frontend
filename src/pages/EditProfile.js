@@ -18,7 +18,7 @@ const fakeuser = {
 // Fake UserProfile object for testing
 const userProfile = {
   username: fakeuser.username,
-  phone_number: '(123)456-7890',
+  phone_number: '123-456-7890',
   email: fakeuser.email,
   friends: [
     'Sammy', 'George', 'Sarah'
@@ -79,21 +79,23 @@ const EditProfile = (props) => {
       phone_number: evt.target.phone_number.value,
     }
 
+    console.log(newUserData)
+
     //SEND USER2 DATA TO BACKEND TO UPDATE PROFILE
 
     // cheated.. looped through entire list of user profiles
-    let allUsers = await props.UserAPI.getProfiles()
-    let thisProfile = false
-    for (let i in allUsers) {
-      if (allUsers[i].username == user.username) {
-        thisProfile = allUsers[i]
-      }
-    }
-    newUserData.key = thisProfile.id
-    console.log(newUserData)
+    // let allUsers = await props.UserAPI.getProfiles()
+    // let thisProfile = false
+    // for (let i in allUsers) {
+    //   if (allUsers[i].username == user.username) {
+    //     thisProfile = allUsers[i]
+    //   }
+    // }
+    // newUserData.key = thisProfile.id
+    // console.log(newUserData)
 
-    let response = await props.UserAPI.editProfile(newUserData, props.token)
-    console.log(response)
+    // let response = await props.UserAPI.editProfile(newUserData, props.token)
+    // console.log(response)
 
   }
 
@@ -112,7 +114,7 @@ const EditProfile = (props) => {
           <Form.Row>
             <Form.Group as={Col} controlId='email'>
               <Form.Label>Email: </Form.Label>
-              <Form.Control type='text' placeholder={user.email} />
+              <Form.Control type='email' placeholder={user.email} />
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -126,8 +128,8 @@ const EditProfile = (props) => {
             </Form.Group>
           </Form.Row>
           <Form.Group controlId='phone_number'>
-            <Form.Label>Phone number: </Form.Label>
-            <Form.Control type='text' placeholder={userProfile.phone_number} />
+            <Form.Label>Phone number: xxx-xxx-xxxx</Form.Label>
+            <Form.Control type='text' pattern="^\d{3}-\d{3}-\d{4}$" placeholder={userProfile.phone_number} />
           </Form.Group>
           <Form.Group controlId='password'>
             <Form.Label>Password</Form.Label>
