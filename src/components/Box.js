@@ -10,6 +10,7 @@ const Box = ({
   location,
   url,
   type,
+  zIndex,
   isDropped,
 }) => {
   const hidden = {
@@ -25,7 +26,7 @@ const Box = ({
   if (!isDropped) {
     return (
       <div ref={drag}>
-        <Card key={name} id="card" style={{ width: "30%" }}>
+        <Card key={name} id="card" style={{ width: "30%", position: 'absolute', zIndex: {zIndex}}}>
           <Card.Img
             variant="top"
             id="img"

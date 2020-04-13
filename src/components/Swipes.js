@@ -6,9 +6,12 @@ import ItemTypes from "./ItemTypes";
 import update from "immutability-helper";
 
 export default function Swipes(props) {
+
   const cards = () => {
     let data = [];
+    let zIndex = 0
     for (let i = 0; i < props.apiData.length; i++) {
+      zIndex++
       data[i] = {
         name: props.apiData[i].name,
         image_url: props.apiData[i].image_url,
@@ -17,20 +20,22 @@ export default function Swipes(props) {
         location: props.apiData[i].location,
         url: props.apiData[i].url,
         type: ItemTypes.RESTAURANT,
+        zIndex: zIndex,
       };
     }
     return data;
   };
 
-  console.log(props);
   const [yesbin, setYesbin] = useState([
     { accepts: [ItemTypes.RESTAURANT], lastDroppedItem: null },
   ]);
+
   const [nobin, setNobin] = useState([
     { accepts: [ItemTypes.RESTAURANT], lastDroppedItem: null },
   ]);
+
   const [boxes] = useState(cards(props.apiData));
-  console.log(boxes);
+
   const [droppedBoxNames, setDroppedBoxNames] = useState([]);
   function isDropped(boxName) {
     return droppedBoxNames.indexOf(boxName) > -1;
@@ -54,6 +59,7 @@ export default function Swipes(props) {
     },
     [droppedBoxNames, yesbin]
   );
+
   const handleDrop2 = useCallback(
     (index, item) => {
       const { name } = item;
@@ -72,6 +78,7 @@ export default function Swipes(props) {
     },
     [droppedBoxNames, nobin]
   );
+
   return (
     <div>
       <span style={{ overflow: "hidden", clear: "both" }}>
@@ -97,7 +104,7 @@ export default function Swipes(props) {
 
       <div style={{ overflow: "hidden", clear: "both" }}>
         {boxes.map(
-          ({ name, image_url, rating, price, location, url, type }, index) => (
+          ({ name, image_url, rating, price, location, url, type, zIndex }, index) => (
             <Box
               name={name}
               image_url={image_url}
@@ -108,6 +115,7 @@ export default function Swipes(props) {
               type={type}
               isDropped={isDropped(name)}
               key={index}
+              zIndex={zIndex}
             />
           )
         )}
