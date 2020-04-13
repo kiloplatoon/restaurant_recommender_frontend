@@ -21,8 +21,6 @@ export default function Swipes(props) {
     }
     return data;
   };
-
-  console.log(props);
   const [yesbin, setYesbin] = useState([
     { accepts: [ItemTypes.RESTAURANT], lastDroppedItem: null },
   ]);
@@ -30,17 +28,20 @@ export default function Swipes(props) {
     { accepts: [ItemTypes.RESTAURANT], lastDroppedItem: null },
   ]);
   const [boxes] = useState(cards(props.apiData));
-  console.log(boxes);
+
+  const [yesBoxNames, setYesBoxNames] = useState([]);
+  function yesIsDropped(boxName) {
+    return yesBoxNames.indexOf(boxName) > -1;
+  }
   const [droppedBoxNames, setDroppedBoxNames] = useState([]);
   function isDropped(boxName) {
     return droppedBoxNames.indexOf(boxName) > -1;
   }
-
   const handleDrop1 = useCallback(
     (index, item) => {
       const { name } = item;
-      setDroppedBoxNames(
-        update(droppedBoxNames, name ? { $push: [name] } : { $push: [] })
+      setYesBoxNames(
+        update(yesBoxNames, name ? { $push: [name] } : { $push: [] })
       );
       setYesbin(
         update(yesbin, {
@@ -52,8 +53,9 @@ export default function Swipes(props) {
         })
       );
     },
-    [droppedBoxNames, yesbin]
+    [yesBoxNames, yesbin]
   );
+  console.log(yesBoxNames);
   const handleDrop2 = useCallback(
     (index, item) => {
       const { name } = item;
@@ -72,6 +74,7 @@ export default function Swipes(props) {
     },
     [droppedBoxNames, nobin]
   );
+
   return (
     <div>
       <span style={{ overflow: "hidden", clear: "both" }}>
@@ -106,6 +109,7 @@ export default function Swipes(props) {
               location={location}
               url={url}
               type={type}
+              yesIsDropped={yesIsDropped(name)}
               isDropped={isDropped(name)}
               key={index}
             />
