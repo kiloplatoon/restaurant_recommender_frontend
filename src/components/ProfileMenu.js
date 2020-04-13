@@ -16,6 +16,7 @@ const ProfileMenu = ({user}) => {
         <Link id='profile-link' to="/profile">Profile</Link><br></br>
         <Link id='profile-link' to="/home">Home</Link><br></br>
         <Link id='profile-link' to="/start">Start Search</Link>
+        <Link id='profile-link' to="/search">Find Friends</Link>
       </Dropdown.Menu>
     </Dropdown>
   );

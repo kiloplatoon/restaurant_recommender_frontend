@@ -10,6 +10,7 @@ import Signup from './pages/Signup';
 
 import Profile from './pages/Profile'
 import EditProfile from './pages/EditProfile'
+import UserSearch from './pages/UserSearch'
 import UserForm from './components/UserForm';
 import ProfileMenu from './components/ProfileMenu'
 
@@ -56,7 +57,21 @@ const App = () => {
     //console.log(res.token !== undefined)
     if (res.token !== undefined && res.token !== null) {
       localStorage.setItem('dinnr-token', res.token)
-      setUser(res.user)
+
+      let userID = res.user.id
+      let userProfile = await UserAPI.getProfile(userID, res.token)
+      let userData = await UserAPI.getUser(userID, res.token)
+      let user = {
+        id: userID,
+        username: userData.username,
+        phone_number: userProfile.phone_number,
+        email: userData.email,
+        friends: userProfile.friends,
+        first_name: userData.first_name,
+        last_name: userData.last_name
+      }
+      console.log(user)
+      setUser(user)
       setToken(res.token)
       setIsLoggedIn(true)
       alert('Successfully Logged In!')
@@ -158,6 +173,20 @@ const App = () => {
       handleSignup={handleSignup}
       handleLogout={handleLogout}
       UserAPI={UserAPI}
+      getLoggedInUser={getLoggedInUser}
+      />
+    )
+  }
+
+  const renderUserSearch = () => {
+    return(
+      <UserSearch
+      isLoggedIn={isLoggedIn}
+      user={user}
+      token={token}
+      handleSignup={handleSignup}
+      handleLogout={handleLogout}
+      UserAPI={UserAPI}
       />
     )
   }
@@ -186,6 +215,8 @@ const App = () => {
             <Route exact path='/profile' render={renderProfile} />
             <Route exact path='/editprofile' render={renderEditProfile} />
             <Route exact path='/start' render={renderMain} />
+
+            <Route exact path='/search' render={renderUserSearch} />
           </Router>
         </div>
       </div>

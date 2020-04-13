@@ -3,22 +3,18 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
-import { Avatar } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 
 
-// Fake User object for testing
+// Fake UserProfile object for testing
 const fakeuser = {
   email: 'fakeUser@email.com',
   first_name: 'TEST',
   last_name: 'TEST',
   username: 'fakeuser123'
 }
-
-// Fake UserProfile object for testing
 const userProfile = {
   username: fakeuser.username,
-  phone_number: '123-456-7890',
+  phone_number: '(123)456-7890',
   email: fakeuser.email,
   friends: [
     'Sammy', 'George', 'Sarah'
@@ -27,39 +23,23 @@ const userProfile = {
   last_name: fakeuser.last_name
 }
 
-// for material-ui
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-    position: "absolute",
-    
-  },
-  small: {
-    width: theme.spacing(3),
-    height: theme.spacing(3),
-  },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-  },
-}));
+
 
 
 
 const EditProfile = (props) => {
 
-  const classes = useStyles();
+  let getLoggedInUser
 
   let user
   if (props.token) {
     user = props.user
+    getLoggedInUser = props.getLoggedInUser
   } else {
     user = userProfile
+    getLoggedInUser = () => {console.log('no')}
   }
-  
+
   const handleSubmit = async (evt) => {
     evt.preventDefault()
     
@@ -82,27 +62,17 @@ const EditProfile = (props) => {
 
     console.log(newUserData)
 
-    //SEND USER2 DATA TO BACKEND TO UPDATE PROFILE
-
     let response = await props.UserAPI.editProfile(newUserData, props.token)
     console.log(response)
+
+    // Reload data and go back to profile component
+    //  maybe do the getLoggedInUser
     
-    return (<Redirect 
-      to='/profile'
-    />)
   }
 
 
- 
   return (
-    <>
-    {
-      // props.isLoggedIn
-      // ?
-      // <Redirect to='/home' />
-      // :
-      <div className='authForm'>
-        <h3>{user.username} <Avatar id='profile-image' className={classes.large} >{`${user.first_name[0]} ${user.last_name[0]}`}</Avatar> </h3>
+    <div className='authForm'>
         <Form className='container' style={{textAlign: 'left'}} onSubmit={handleSubmit}>
           <Form.Row>
             <Form.Group as={Col} controlId='email'>
@@ -122,7 +92,7 @@ const EditProfile = (props) => {
           </Form.Row>
           <Form.Group controlId='phone_number'>
             <Form.Label>Phone number: xxx-xxx-xxxx</Form.Label>
-            <Form.Control type='text' pattern="^\d{3}-\d{3}-\d{4}$" placeholder={userProfile.phone_number} />
+            <Form.Control type='text' pattern="^\d{3}-\d{3}-\d{4}$" placeholder={user.phone_number} />
           </Form.Group>
           <Form.Group controlId='password'>
             <Form.Label>Password</Form.Label>
@@ -131,8 +101,7 @@ const EditProfile = (props) => {
           <Button style={{marginTop: '1rem'}} className='btn btn-dark' type='submit'> Submit </Button>
         </Form>
       </div>
-    }
-    </>
+
   );
 };
 

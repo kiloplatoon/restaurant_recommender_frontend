@@ -37,6 +37,11 @@ code {
 
 #profile-image {
   position: relative;
-  top: -45px;
-  right: -20px;
+  margin: auto;
+  left: -80px;
+  top: -42px;
+}
+
+#profile-name {
+  position: relative;
 }
