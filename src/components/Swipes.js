@@ -103,7 +103,7 @@ export default function Swipes(props) {
         <Col>
           {boxes.map(
             (
-              { name, image_url, rating, price, location, url, type },
+              { name, image_url, rating, price, location, url, type, zIndex },
               index
             ) => (
               <Box
@@ -117,6 +117,7 @@ export default function Swipes(props) {
                 type={type}
                 yesIsDropped={yesIsDropped(name)}
                 isDropped={isDropped(name)}
+                zIndex={zIndex}
               />
             )
           )}
@@ -129,7 +130,6 @@ export default function Swipes(props) {
               lastDroppedItem={lastDroppedItem}
               onDrop={(item) => handleDrop1(index, item)}
               key={index}
-              zIndex={zIndex}
             />
           ))}
         </Col>

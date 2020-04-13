@@ -44,12 +44,15 @@ body {
 
 #card {
   height: 500px !important;
+  border-radius: 10px;
   width: 150px;
-  margin-top: 5vh;
-  background-color: #222222a6 !important;
-  display: inline-block;
+  margin: 1rem auto;
+  background-color: #afafaf !important;
+  display: block;
   padding: 2rem;
   text-align: left;
+  position: absolute !important;
+
 }
 
 #img {
