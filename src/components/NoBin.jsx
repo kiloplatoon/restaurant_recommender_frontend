@@ -7,7 +7,7 @@ const style = {
   color: "white",
   padding: "1rem",
   textAlign: "center",
-  fontSize: "3.5rem",
+  fontSize: "2.5rem",
   lineHeight: "12rem",
   fontFamily: "Rochester, cursive",
   float: "left",
@@ -32,7 +32,7 @@ const NoBin = ({ accept, lastDroppedItem, onDrop }) => {
     <div ref={drop} className="ynBox" style={{ ...style, backgroundColor }}>
       {isActive ? "Release" : "No"}
 
-      {lastDroppedItem && <p>Okay!</p>}
+      {lastDroppedItem && <span>&nbsp;Okay!</span>}
     </div>
   );
 };

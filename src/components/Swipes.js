@@ -14,7 +14,9 @@ export default function Swipes(props) {
   };
   const cards = () => {
     let data = [];
+    let zIndex = 0
     for (let i = 0; i < props.apiData.length; i++) {
+      zIndex++
       data[i] = {
         name: props.apiData[i].name,
         image_url: props.apiData[i].image_url,
@@ -23,6 +25,7 @@ export default function Swipes(props) {
         location: props.apiData[i].location,
         url: props.apiData[i].url,
         type: ItemTypes.RESTAURANT,
+        zIndex: zIndex,
       };
     }
     return data;
@@ -30,9 +33,11 @@ export default function Swipes(props) {
   const [yesbin, setYesbin] = useState([
     { accepts: [ItemTypes.RESTAURANT], lastDroppedItem: null },
   ]);
+
   const [nobin, setNobin] = useState([
     { accepts: [ItemTypes.RESTAURANT], lastDroppedItem: null },
   ]);
+
   const [boxes] = useState(cards(props.apiData));
 
   const [yesBoxNames, setYesBoxNames] = useState([]);
@@ -98,7 +103,7 @@ export default function Swipes(props) {
         <Col>
           {boxes.map(
             (
-              { name, image_url, rating, price, location, url, type },
+              { name, image_url, rating, price, location, url, type, zIndex },
               index
             ) => (
               <Box
@@ -112,6 +117,7 @@ export default function Swipes(props) {
                 type={type}
                 yesIsDropped={yesIsDropped(name)}
                 isDropped={isDropped(name)}
+                zIndex={zIndex}
               />
             )
           )}
