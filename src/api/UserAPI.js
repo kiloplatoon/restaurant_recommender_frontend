@@ -64,7 +64,9 @@ const getProfiles = () => {
     }
   })
   .then(response => response.json())
-  .then(result => result)
+  .then(result => {
+    return result
+  })
   .catch(error => console.log('error', error));
 }
 

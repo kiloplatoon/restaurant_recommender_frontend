@@ -55,36 +55,3 @@ const ViewProfile = (props) => {
 
 export default ViewProfile;
 
-
-
-// return (
-//   <>
-//   {
-//     !props.isLoggedIn 
-//     ?
-//     <Redirect to='/login' /> 
-//     :  
-//     <div className='authForm'>
-//       <h3>{user.username} <Avatar id='profile-image' className={classes.large} >{`${user.first_name[0]} ${user.last_name[0]}`}</Avatar> </h3>
-//       <Form className='container' style={{textAlign: 'left'}} onSubmit={handleEditClick}>
-//         <Form.Row>
-//           <Form.Group as={Col} controlId='first_name'>
-//             <Form.Label>First name: {user.first_name}</Form.Label>
-//           </Form.Group>
-//           <Form.Group as={Col} controlId='last_name'>
-//             <Form.Label>Last name: {user.last_name}</Form.Label>
-//           </Form.Group>
-//         </Form.Row>
-//         <Form.Group controlId='phonenumber'>
-//           <Form.Label>Phone number: {userProfile.phone_number}</Form.Label>
-//         </Form.Group>
-//         <Form.Group controlId='friends'>
-//           <Form.Label>Friends</Form.Label>
-//           <div>{renderFriends()}</div>
-//         </Form.Group>
-//         <Button style={{marginTop: '1rem'}} className='btn btn-dark' type='submit'><Link id='profile-link' to="/editprofile">Edit</Link></Button>
-//       </Form>
-//     </div>
-//   }
-//   </>
-// );

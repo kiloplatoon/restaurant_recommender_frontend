@@ -67,39 +67,6 @@ const Profile = (props) => {
     user = userProfile
   }
 
-  ////////////////////////////
-  // Add friends into state //
-  // ?????
-
-
-  // const getUserInfo = async () => {
-  //   let token = localStorage.getItem('dinnr-token')
-  //   let userID = user.id
-
-  //   let userProfile = await props.UserAPI.getProfile(userID, token)
-  //   let userData = await props.UserAPI.getUser(userID, token)
-  //   console.log(userData)
-  //   console.log(userProfile)
-
-  //   user = {
-  //     username: userData.username,
-  //     phone_number: userProfile.phone_number,
-  //     email: userData.email,
-  //     friends: userProfile.friends,
-  //     first_name: userData.first_name,
-  //     last_name: userData.last_name
-  //   }
-
-  //   console.log(user)
-  //   return user
-
-  // }
-
-  // useEffect(() => {
-  //   getUserInfo()
-  //   }, [user]
-  // )
-
 
   const renderViewProfile = () => {
     return(
