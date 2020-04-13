@@ -28,7 +28,7 @@ const Box = ({
   } else {
     return (
       <div ref={drag}>
-        <Card key={name} id="card" style={{ width: "30%" }}>
+        <Card key={name} id="card" style={{ width: "100%" }}>
           <Card.Img
             variant="top"
             id="img"
