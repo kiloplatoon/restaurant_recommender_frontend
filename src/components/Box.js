@@ -12,6 +12,7 @@ const Box = ({
   type,
   zIndex,
   isDropped,
+  yesIsDropped,
 }) => {
   const hidden = {
     display: "hidden",
@@ -23,7 +24,9 @@ const Box = ({
       opacity: monitor.isDragging() ? 0.4 : 1,
     }),
   });
-  if (!isDropped) {
+  if (isDropped || yesIsDropped) {
+    return <div ref={drag} style={{ ...hidden, opacity }}></div>;
+  } else {
     return (
       <div ref={drag}>
         <Card key={name} id="card" style={{ width: "100%", position: 'absolute', zIndex: {zIndex}}}>
@@ -44,8 +47,6 @@ const Box = ({
         </Card>
       </div>
     );
-  } else {
-    return <div ref={drag} style={{ ...hidden, opacity }}></div>;
   }
 };
 

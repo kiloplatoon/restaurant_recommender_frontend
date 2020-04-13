@@ -4,9 +4,14 @@ import NoBin from "./NoBin";
 import Box from "./Box.js";
 import ItemTypes from "./ItemTypes";
 import update from "immutability-helper";
+import { Container, Row, Col } from "react-bootstrap";
 
 export default function Swipes(props) {
-
+  const deck = {
+    overflow: "hidden",
+    heigth: "700px",
+    width: "700px",
+  };
   const cards = () => {
     let data = [];
     let zIndex = 0
@@ -25,7 +30,6 @@ export default function Swipes(props) {
     }
     return data;
   };
-
   const [yesbin, setYesbin] = useState([
     { accepts: [ItemTypes.RESTAURANT], lastDroppedItem: null },
   ]);
@@ -36,16 +40,19 @@ export default function Swipes(props) {
 
   const [boxes] = useState(cards(props.apiData));
 
+  const [yesBoxNames, setYesBoxNames] = useState([]);
+  function yesIsDropped(boxName) {
+    return yesBoxNames.indexOf(boxName) > -1;
+  }
   const [droppedBoxNames, setDroppedBoxNames] = useState([]);
   function isDropped(boxName) {
     return droppedBoxNames.indexOf(boxName) > -1;
   }
-
   const handleDrop1 = useCallback(
     (index, item) => {
       const { name } = item;
-      setDroppedBoxNames(
-        update(droppedBoxNames, name ? { $push: [name] } : { $push: [] })
+      setYesBoxNames(
+        update(yesBoxNames, name ? { $push: [name] } : { $push: [] })
       );
       setYesbin(
         update(yesbin, {
@@ -57,9 +64,9 @@ export default function Swipes(props) {
         })
       );
     },
-    [droppedBoxNames, yesbin]
+    [yesBoxNames, yesbin]
   );
-
+  console.log(yesBoxNames);
   const handleDrop2 = useCallback(
     (index, item) => {
       const { name } = item;
@@ -80,46 +87,53 @@ export default function Swipes(props) {
   );
 
   return (
-    <div>
-      <span style={{ overflow: "hidden", clear: "both" }}>
-        {yesbin.map(({ accepts, lastDroppedItem }, index) => (
-          <YesBin
-            accept={accepts}
-            lastDroppedItem={lastDroppedItem}
-            onDrop={(item) => handleDrop1(index, item)}
-            key={index}
-          />
-        ))}
-      </span>
-      <span style={{ overflow: "hidden", clear: "both" }}>
-        {nobin.map(({ accepts, lastDroppedItem }, index) => (
-          <NoBin
-            accept={accepts}
-            lastDroppedItem={lastDroppedItem}
-            onDrop={(item) => handleDrop2(index, item)}
-            key={index}
-          />
-        ))}
-      </span>
+    <Container>
+      <Row>
+        <Col style={{ overflow: "hidden", clear: "both" }}>
+          {nobin.map(({ accepts, lastDroppedItem }, index) => (
+            <NoBin
+              accept={accepts}
+              lastDroppedItem={lastDroppedItem}
+              onDrop={(item) => handleDrop2(index, item)}
+              key={index}
+            />
+          ))}
+        </Col>
 
-      <div style={{ overflow: "hidden", clear: "both" }}>
-        {boxes.map(
-          ({ name, image_url, rating, price, location, url, type, zIndex }, index) => (
-            <Box
-              name={name}
-              image_url={image_url}
-              rating={rating}
-              price={price}
-              location={location}
-              url={url}
-              type={type}
-              isDropped={isDropped(name)}
+        <Col>
+          {boxes.map(
+            (
+              { name, image_url, rating, price, location, url, type },
+              index
+            ) => (
+              <Box
+                key={index}
+                name={name}
+                image_url={image_url}
+                rating={rating}
+                price={price}
+                location={location}
+                url={url}
+                type={type}
+                yesIsDropped={yesIsDropped(name)}
+                isDropped={isDropped(name)}
+              />
+            )
+          )}
+        </Col>
+
+        <Col style={{ overflow: "hidden", clear: "both" }}>
+          {yesbin.map(({ accepts, lastDroppedItem }, index) => (
+            <YesBin
+              accept={accepts}
+              lastDroppedItem={lastDroppedItem}
+              onDrop={(item) => handleDrop1(index, item)}
               key={index}
               zIndex={zIndex}
             />
-          )
-        )}
-      </div>
-    </div>
+          ))}
+        </Col>
+      </Row>
+    </Container>
   );
 }
