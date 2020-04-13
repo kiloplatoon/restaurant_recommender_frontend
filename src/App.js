@@ -9,7 +9,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 
 import Profile from './pages/Profile'
-import EditProfile from './pages/EditProfile'
 import UserSearch from './pages/UserSearch'
 import UserForm from './components/UserForm';
 import ProfileMenu from './components/ProfileMenu'
@@ -151,19 +150,6 @@ const App = () => {
     )
   }
 
-  const renderEditProfile = () => {
-    return(
-      <EditProfile
-      isLoggedIn={isLoggedIn}
-      user={user}
-      token={token}
-      handleSignup={handleSignup}
-      handleLogout={handleLogout}
-      UserAPI={UserAPI}
-      />
-    )
-  }
-
   const renderProfile = () => {
     return(
       <Profile
@@ -213,7 +199,6 @@ const App = () => {
             <Route exact path='/signup' render={renderSignup} />
             <Route exact path='/partners' component={UserForm} />
             <Route exact path='/profile' render={renderProfile} />
-            <Route exact path='/editprofile' render={renderEditProfile} />
             <Route exact path='/start' render={renderMain} />
 
             <Route exact path='/search' render={renderUserSearch} />
