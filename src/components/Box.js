@@ -26,7 +26,7 @@ const Box = ({
   if (!isDropped) {
     return (
       <div ref={drag}>
-        <Card key={name} id="card" style={{ width: "30%", position: 'absolute', zIndex: {zIndex}}}>
+        <Card key={name} id="card" style={{ width: "100%", position: 'absolute', zIndex: {zIndex}}}>
           <Card.Img
             variant="top"
             id="img"
