@@ -3,7 +3,7 @@ import { useDrop } from "react-dnd";
 const style = {
   height: "15rem",
   width: "12rem",
-  margin: '1rem',
+  margin: "1rem",
   color: "white",
   padding: "1rem",
   textAlign: "center",
@@ -29,8 +29,8 @@ const NoBin = ({ accept, lastDroppedItem, onDrop }) => {
     backgroundColor = "#880000cc";
   }
   return (
-    <div ref={drop} className='ynBox' style={{ ...style, backgroundColor }}>
-      {isActive ? "Release to drop" : "No"}
+    <div ref={drop} className="ynBox" style={{ ...style, backgroundColor }}>
+      {isActive ? "Release" : "No"}
 
       {lastDroppedItem && <p>Okay!</p>}
     </div>

@@ -4,8 +4,14 @@ import NoBin from "./NoBin";
 import Box from "./Box.js";
 import ItemTypes from "./ItemTypes";
 import update from "immutability-helper";
+import { Container, Row, Col } from "react-bootstrap";
 
 export default function Swipes(props) {
+  const deck = {
+    overflow: "hidden",
+    heigth: "700px",
+    width: "700px",
+  };
   const cards = () => {
     let data = [];
     for (let i = 0; i < props.apiData.length; i++) {
@@ -76,46 +82,52 @@ export default function Swipes(props) {
   );
 
   return (
-    <div>
-      <span style={{ overflow: "hidden", clear: "both" }}>
-        {yesbin.map(({ accepts, lastDroppedItem }, index) => (
-          <YesBin
-            accept={accepts}
-            lastDroppedItem={lastDroppedItem}
-            onDrop={(item) => handleDrop1(index, item)}
-            key={index}
-          />
-        ))}
-      </span>
-      <span style={{ overflow: "hidden", clear: "both" }}>
-        {nobin.map(({ accepts, lastDroppedItem }, index) => (
-          <NoBin
-            accept={accepts}
-            lastDroppedItem={lastDroppedItem}
-            onDrop={(item) => handleDrop2(index, item)}
-            key={index}
-          />
-        ))}
-      </span>
-
-      <div style={{ overflow: "hidden", clear: "both" }}>
-        {boxes.map(
-          ({ name, image_url, rating, price, location, url, type }, index) => (
-            <Box
-              name={name}
-              image_url={image_url}
-              rating={rating}
-              price={price}
-              location={location}
-              url={url}
-              type={type}
-              yesIsDropped={yesIsDropped(name)}
-              isDropped={isDropped(name)}
+    <Container>
+      <Row>
+        <Col style={{ overflow: "hidden", clear: "both" }}>
+          {nobin.map(({ accepts, lastDroppedItem }, index) => (
+            <NoBin
+              accept={accepts}
+              lastDroppedItem={lastDroppedItem}
+              onDrop={(item) => handleDrop2(index, item)}
               key={index}
             />
-          )
-        )}
-      </div>
-    </div>
+          ))}
+        </Col>
+
+        <Col>
+          {boxes.map(
+            (
+              { name, image_url, rating, price, location, url, type },
+              index
+            ) => (
+              <Box
+                key={index}
+                name={name}
+                image_url={image_url}
+                rating={rating}
+                price={price}
+                location={location}
+                url={url}
+                type={type}
+                yesIsDropped={yesIsDropped(name)}
+                isDropped={isDropped(name)}
+              />
+            )
+          )}
+        </Col>
+
+        <Col style={{ overflow: "hidden", clear: "both" }}>
+          {yesbin.map(({ accepts, lastDroppedItem }, index) => (
+            <YesBin
+              accept={accepts}
+              lastDroppedItem={lastDroppedItem}
+              onDrop={(item) => handleDrop1(index, item)}
+              key={index}
+            />
+          ))}
+        </Col>
+      </Row>
+    </Container>
   );
 }
