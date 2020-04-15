@@ -19,11 +19,14 @@ const ViewProfile = (props) => {
   }
 
   const renderFriends = () => {
+
     return user.friends.map((friend, index) => {
+      // Create API call to get user 
+      // let curFriend =  props.UserAPI.getUser(friend, props.token)
     return <ul key={index} onClick={() => {
       console.log(user.friends[index])
     }}> 
-      {friend} 
+      {friend.username} 
     </ul>
     })
   }

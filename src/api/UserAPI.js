@@ -1,5 +1,7 @@
 const url = 'http://localhost:8000/'
 
+
+// LOGIN
 const login = (userObject) => {
   console.log(userObject)
   var myHeaders = new Headers();
@@ -21,6 +23,8 @@ const login = (userObject) => {
     .catch(error => console.log('error', error));
 }
 
+
+// SIGNUP
 const signup = (userObject) => {
   var myHeaders = new Headers();
   console.log(userObject)
@@ -45,6 +49,8 @@ const signup = (userObject) => {
 
 }
 
+
+// GET LOGGED IN USER with TOKEN
 const getLoggedInUser = (token) => {
 
   return fetch(`${url}api/auth/profiles`, {
@@ -181,6 +187,73 @@ const getUser = (userID, token) => {
   return (data)
 }
 
+
+// ACCEPT FRIEND REQUEST
+const acceptFriendRequest = (from_user, to_user) => {
+  console.log('accepting')
+  console.log(`Making friend request from ${from_user} to ${to_user}`)
+  // create the body
+  let myHeaders = new Headers();
+  let formdata = new FormData()
+  formdata.append('to_user', to_user)
+  formdata.append('from_user', from_user)
+  formdata.append('accepted_status', true)
+
+  let requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  }
+
+  return fetch(`${url}api/auth/friends/${from_user}/`, requestOptions)
+    .then(response => response)
+    .then(result => {
+      return result
+    })
+    .catch(error => console.log('error', error));
+}
+
+
+// SEND FRIEND REQUEST 
+const sendFriendRequest = (from_user, to_user) => {
+  console.log(`Making friend request from ${from_user} to ${to_user}`)
+  // create the body
+  let myHeaders = new Headers();
+  let formdata = new FormData()
+  formdata.append('to_user', to_user)
+  formdata.append('from_user', from_user)
+
+  let requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  }
+
+  return fetch(`${url}api/auth/friends/${from_user}/`, requestOptions)
+    .then(response => response)
+    .then(result => {
+      return result
+    })
+    .catch(error => console.log('error', error));
+  
+}
+
+// GET FRIEND REQUESTS
+const getFriendRequests = (user_pk) => {
+  console.log('Getting Requests')
+
+  return fetch(`${url}api/auth/friends/${user_pk}/`)
+    .then(response => response)
+    .then(result => {
+      console.log(result)
+      return result
+    })
+    .catch(error => console.log('error', error));
+}
+
+
 export default {
-  login, signup, getLoggedInUser, editProfile, getProfiles, getProfile, getUser
+  login, signup, getLoggedInUser, editProfile, getProfiles, getProfile, getUser, sendFriendRequest, getFriendRequests, acceptFriendRequest
 }

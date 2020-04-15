@@ -36,6 +36,7 @@ const App = () => {
       console.log('token: ', token)
       let res = await UserAPI.getLoggedInUser(token)
       let data = await res.json()
+      data.shift() // remove admin from list
       setIsLoggedIn(true)
       setUser(data)
       console.log(data)
@@ -60,12 +61,32 @@ const App = () => {
       let userID = res.user.id
       let userProfile = await UserAPI.getProfile(userID, res.token)
       let userData = await UserAPI.getUser(userID, res.token)
+
+      ////
+      let friendsList = userProfile.friends
+      console.log(friendsList)
+      for (let i in friendsList) {
+        let friendID = friendsList[i]
+        let friendData = await UserAPI.getUser(friendID, res.token)
+        .then(response => response)
+        .then(result => {
+          console.log(result)
+          return result
+        })
+        .catch(error => console.log('error', error));
+
+        friendsList[i] = friendData
+
+      }
+      console.log(userData)
+      
+      
       let user = {
         id: userID,
         username: userData.username,
         phone_number: userProfile.phone_number,
         email: userData.email,
-        friends: userProfile.friends,
+        friends: friendsList,
         first_name: userData.first_name,
         last_name: userData.last_name
       }

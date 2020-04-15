@@ -45,3 +45,16 @@ code {
 #profile-name {
   position: relative;
 }
+
+
+#user-list {
+  position: relative;
+  height: auto;
+  width: 40%;
+  font-size: 28px;
+  left: -10px;
+}
+
+#request-button {
+  position: relative;
+}

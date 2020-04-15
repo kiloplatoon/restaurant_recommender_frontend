@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ProfileCustomNav from './profile_components/ProfileCustomNav'
 import ViewProfile from './profile_components/ViewProfile'
 import EditProfile from './profile_components/EditProfile'
+import ViewFriends from './profile_components/ViewFriends'
 
 // Fake User object for testing
 const fakeuser = {
@@ -88,10 +89,20 @@ const Profile = (props) => {
     )
   }
 
-  const handleEditClick = async (evt) => {
-    evt.preventDefault()
-    console.log('Go to EDIT PROFILE page')
+  const renderViewFriends = () => {
+    return(
+      <ViewFriends
+      user={props.user} 
+      token={props.token}
+      UserAPI={props.UserAPI}
+      />
+    )
   }
+
+  // const handleEditClick = async (evt) => {
+  //   evt.preventDefault()
+  //   console.log('Go to EDIT PROFILE page')
+  // }
 
  return (
   <>
@@ -108,6 +119,7 @@ const Profile = (props) => {
         <ProfileCustomNav user={props.user}/>
         <Route exact path='/profile' render={renderViewProfile} />
         <Route exact path='/profile/edit' render={renderEditProfile} />
+        <Route exact path='/profile/friends' render={renderViewFriends} />
       </Router>
     </div>
   }
