@@ -16,9 +16,9 @@ export default function Swipes(props) {
   
   const [match, setMatch] = useState(false)
 
-  // useEffect(() => {
-  //   compareLikes()
-  // }, [])
+  useEffect(() => {
+    compareLikes()
+  }, [''])
 
   const compareLikes = () => {
     console.log(yesbin)
@@ -29,23 +29,27 @@ export default function Swipes(props) {
         let testTwo = userLikes[i]
         if (testTwo == test.name) {
           // MATCH!  REDIRECT HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-          // setMatch(true)
+          setMatch(true)
           console.log('MATCH!!!!!')
+          //return <Redirect to='/match' />
           
-
+          
         }
       }
     }
   }
 
+  // const renderRedirect = () => {
+  //   if (match == true) {
+  //   }
+  // }
+  
   const checkCompleted = () => {
-    compareLikes()
+    //compareLikes()
     let noCount = droppedBoxNames.length
     let yesCount = yesBoxNames.length
     let maxCount = boxes.length
-    console.log(`noCount = ${noCount}`)
-    console.log(`yesCount = ${yesCount}`)
-    console.log(`maxCount = ${maxCount}`)
+
     if (noCount+yesCount == maxCount) {
       alert('COMPLETED')
       console.log('Completed - send yesBoxNames to backend to be stored and retrieved')
@@ -147,6 +151,7 @@ export default function Swipes(props) {
       setYesBoxNames(
         update(yesBoxNames, name ? { $push: [name] } : { $push: [] })
       );
+      compareLikes()
       setYesbin(
         update(yesbin, {
           [index]: {
@@ -160,6 +165,7 @@ export default function Swipes(props) {
     },
     [yesBoxNames, yesbin]
   );
+  console.log('CHECK COMPLETED ----------------------------------------------')
   checkCompleted()
   const handleDrop2 = useCallback(
     (index, item) => {
@@ -183,12 +189,12 @@ export default function Swipes(props) {
   console.log(match)
   return (
     <Container>
-      {/* {
+      {
         match
         ?
-        // <Match yesbin={yesbin[0].lastDroppedItem.name} zipcode={props.pendingSessions[0].zipcode} />
+          <Match yesbin={yesbin[0].lastDroppedItem.name} zipcode={props.pendingSessions[0].zipcode} />
         
-        : */}
+        :
       <Row>
         <Col style={{ overflow: "hidden", clear: "both" }}>
           {nobin.map(({ accepts, lastDroppedItem }, index) => (
@@ -231,11 +237,12 @@ export default function Swipes(props) {
               lastDroppedItem={lastDroppedItem}
               onDrop={(item) => handleDrop1(index, item)}
               key={index}
+              
             />
           ))}
         </Col>
       </Row>
-      // }
+       }
     </Container>
   );
 }
