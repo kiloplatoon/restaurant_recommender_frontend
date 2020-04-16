@@ -16,7 +16,7 @@ const Login = (props) => {
         <Form className='container' style={{textAlign: 'left'}} onSubmit={props.handleLogin}>
           <Form.Group controlId='username'>
             <Form.Label>Username</Form.Label>
-            <Form.Control required type='username' placeholder='Username' />
+            <Form.Control required type='text' placeholder='username' />
           </Form.Group>
           <Form.Group controlId='password'>
             <Form.Label>Password</Form.Label>

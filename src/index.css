@@ -11,3 +11,50 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#profile-menu {
+  position: absolute;
+  right: 20px;
+  top: -35px;
+  background-color: #404854;
+  border-color: #272b30;
+  outline: none;
+}
+
+#profile-menu:focus {
+  outline: none;
+}
+
+#profile-items {
+  color: white;
+  background-color: #404854;
+}
+
+#profile-link {
+  color: white;
+  padding-left: 5px;
+}
+
+#profile-image {
+  position: relative;
+  margin: auto;
+  left: -80px;
+  top: -42px;
+}
+
+#profile-name {
+  position: relative;
+}
+
+
+#user-list {
+  position: relative;
+  height: auto;
+  width: 40%;
+  font-size: 28px;
+  left: -10px;
+}
+
+#request-button {
+  position: relative;
+}

@@ -15,13 +15,19 @@ const Home = (props) => {
       :  
       <div className='container' id='baseComp'>
         <div>
-        <h4 id='welcome'>Welcome {props.username}</h4>
+          {
+            props.pendingSessions
+            ?
+            <Link to='/continue'>
+            <img id='logo' src={require('../images/dinnr.png')} alt='logo'/>
+            </Link>
+            :
+          <Link to='/start'>
+            <img id='logo' src={require('../images/dinnr.png')} alt='logo'/>
+          </Link>
+          }
         </div>
         <div>
-          <h1 id='brand'>Dinnr</h1>
-        </div>
-        <div>
-          <Button className='btn btn-dark'><Link to='/start' style={{color: '#fff'}}>Begin</Link></Button>
         </div>
       </div>
     }
