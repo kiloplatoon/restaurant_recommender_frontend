@@ -46,5 +46,33 @@ body {
 
 #baseComp {
   padding: 1rem;
-  margin-top: 15vh;
+  /* margin-top: 15vh; */
+}
+
+#matchBox {
+  margin-top: 10vh;
+  background-color: #383838a6;
+  display: inline-block;
+  width: 50%;
+  height: auto;
+  padding: 2rem;
+}
+
+#logo{
+  z-index: -1;
+  margin: 0 auto;
+  width: 45%;
+  height: auto;
+  padding: 0;
+}
+
+#button{
+  z-index: 1;
+  position: relative;
+}
+
+#matched{
+  font-size: 6rem;
+  font-family: 'Rochester', cursive;
+  padding: 1rem;
 }
