@@ -254,6 +254,50 @@ const getFriendRequests = (user_pk) => {
 }
 
 
+const startSession = (user_one, user_two, user_likes, apiData, zipcode) => {
+  console.log('CREATING NEW SESSION')
+  var formdata = new FormData();
+  formdata.append("user_one", user_one);
+  formdata.append("user_two", user_two);
+  formdata.append("user_likes", `{${user_likes}}`);
+  formdata.append('apiData', JSON.stringify(apiData))
+  formdata.append("zipcode", zipcode);
+
+  var requestOptions = {
+    method: 'POST',
+    body: formdata,
+    redirect: 'follow'
+  };
+
+  return fetch("http://127.0.0.1:8000/api/auth/session/", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      return result
+    })
+    .catch(error => console.log('error', error));
+}
+
+const checkForSession = (userID) => {
+  console.log(userID)
+  console.log('CHECKING FOR SESSION')
+
+  var formdata = new FormData();
+
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+
+  return fetch(`http://127.0.0.1:8000/api/auth/session/${userID}/`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result)
+      return result
+    })
+    .catch(error => console.log('error', error));
+}
+
+
 export default {
-  login, signup, getLoggedInUser, editProfile, getProfiles, getProfile, getUser, sendFriendRequest, getFriendRequests, acceptFriendRequest
+  login, signup, getLoggedInUser, editProfile, getProfiles, getProfile, getUser, sendFriendRequest, getFriendRequests, acceptFriendRequest, startSession, checkForSession
 }

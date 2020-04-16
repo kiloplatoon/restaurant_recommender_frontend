@@ -3,11 +3,11 @@ import { useDrop } from "react-dnd";
 const style = {
   height: "15rem",
   width: "12rem",
-  margin: '1rem',
+  margin: "1rem",
   color: "white",
   padding: "1rem",
   textAlign: "center",
-  fontSize: "3.5rem",
+  fontSize: "2.5rem",
   lineHeight: "12rem",
   fontFamily: "Rochester, cursive",
   float: "right",
@@ -29,10 +29,10 @@ const YesBin = ({ accept, lastDroppedItem, onDrop }) => {
     backgroundColor = "#00a308cc";
   }
   return (
-    <div ref={drop} className='ynBox' style={{ ...style, backgroundColor }}>
-      {isActive ? "Release to drop" : "Yes"}
+    <div ref={drop} className="ynBox" style={{ ...style, backgroundColor }}>
+      {isActive ? "Release" : "Yes"}
 
-      {lastDroppedItem && <p>Okay!</p>}
+      {lastDroppedItem && <span>&nbsp;Okay!</span>}
     </div>
   );
 };

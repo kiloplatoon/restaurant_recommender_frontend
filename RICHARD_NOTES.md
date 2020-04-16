@@ -26,3 +26,8 @@ NEED TO
     + send post to change FriendRequest.accepted_status to True
       need friendID, curUserID
 
+
+
+
+# Swipes
+  once the nobox and yesbox lenghths together equal the original list Send yesbox to backend.

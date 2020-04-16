@@ -7,6 +7,8 @@ import UserAPI from './api/UserAPI'
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Match from './pages/Match'
+import Continue from './pages/Continue'
 
 import Profile from './pages/Profile'
 import UserSearch from './pages/UserSearch'
@@ -23,6 +25,8 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(null)
+  const [pendingSessions, setPendingSessions] = useState(null)
+  const [continued, setContinued] = useState(null)
 
 
   useEffect(() => {
@@ -62,6 +66,22 @@ const App = () => {
       let userProfile = await UserAPI.getProfile(userID, res.token)
       let userData = await UserAPI.getUser(userID, res.token)
 
+      /// Check for pending sessions
+      let pendingSession = await UserAPI.checkForSession(userData.id)
+
+      if (pendingSession.length > 2) {
+        console.log('ALERT')
+        alert(`YOU HAVE A PENDING SESSION!!`)
+        setPendingSessions(pendingSession)
+
+        // props.pendingSessions is now the session object..
+        // redirect to another swiping page passing props.pendingSessions as another prop..
+
+        
+      }
+      // console.log(JSON.parse(pendingSession[0].all_resteraunts))
+      pendingSession[0].all_resteraunts = JSON.parse(pendingSession[0].all_resteraunts)
+      setPendingSessions(pendingSession)
       ////
       let friendsList = userProfile.friends
       console.log(friendsList)
@@ -128,6 +148,8 @@ const App = () => {
     return <Redirect to='/login' />
   }  
 
+  
+
   const renderLogin = () => {
     return (
       <Login
@@ -156,6 +178,7 @@ const App = () => {
       isLoggedIn={isLoggedIn}
       user={user}
       handleLogout={handleLogout}
+      pendingSessions={pendingSessions}
       />
     )
   }
@@ -167,6 +190,9 @@ const App = () => {
       user={user}
       handleLogout={handleLogout}
       getLoggedInUser={getLoggedInUser}
+      UserAPI={UserAPI}
+      pendingSessions={pendingSessions}
+      
       />
     )
   }
@@ -198,6 +224,29 @@ const App = () => {
     )
   }
 
+  const renderMatch = () => {
+    return(
+      <Match 
+      isLoggedIn={isLoggedIn}
+      user={user}
+      handleLogout={handleLogout}
+      getLoggedInUser={getLoggedInUser}
+      />
+    )
+  }
+
+  const renderContinueSession = () => {
+    return(
+      <Continue 
+      isLoggedIn={isLoggedIn}
+      user={user}
+      handleLogout={handleLogout}
+      getLoggedInUser={getLoggedInUser}
+      pendingSessions={pendingSessions}
+      />
+    )
+  }
+
   return (
     <>
     {
@@ -221,8 +270,9 @@ const App = () => {
             <Route exact path='/partners' component={UserForm} />
             <Route exact path='/profile' render={renderProfile} />
             <Route exact path='/start' render={renderMain} />
-
+            <Route exact path='/continue' render={renderContinueSession} />
             <Route exact path='/search' render={renderUserSearch} />
+            <Route exact path='/match' render={renderMatch} />
           </Router>
         </div>
       </div>

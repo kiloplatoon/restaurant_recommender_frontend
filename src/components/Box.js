@@ -10,6 +10,7 @@ const Box = ({
   location,
   url,
   type,
+  zIndex,
   isDropped,
   yesIsDropped,
 }) => {
@@ -28,7 +29,7 @@ const Box = ({
   } else {
     return (
       <div ref={drag}>
-        <Card key={name} id="card" style={{ width: "30%" }}>
+        <Card key={name} id="card" style={{ width: "100%", zIndex: {zIndex}}}>
           <Card.Img
             variant="top"
             id="img"
