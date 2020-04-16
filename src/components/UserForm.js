@@ -7,10 +7,15 @@ const UserForm = (props) => {
     <div>
       <div className='authForm'>
         <Form style={{textAlign: 'left'}} onSubmit={props.getRestaurants}>
-          <h1 className='h1'>Where should we search?</h1>
           <Form.Group controlId="zipcode">
-            <Form.Label>Zipcode</Form.Label>
-            <Form.Control type='text' placeholder="60603" />
+            <Form.Label><h5 className='formHeader'>Where should we search?</h5></Form.Label>
+            <Form.Control type='text' placeholder="zipcode" />
+          </Form.Group>
+          <br />
+          <br />
+          <Form.Group controlId="username">
+            <Form.Label><h5 className='formHeader'>Who do you want to dine with?</h5></Form.Label>
+            <Form.Control type='text' placeholder="username" />
           </Form.Group>
           <Button className='btn btn-dark' type='submit'>Submit</Button>
         </Form>

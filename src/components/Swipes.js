@@ -1,17 +1,21 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import YesBin from "./YesBin";
 import NoBin from "./NoBin";
 import Box from "./Box.js";
 import ItemTypes from "./ItemTypes";
 import update from "immutability-helper";
 import { Container, Row, Col } from "react-bootstrap";
+import base from '../firebase.js'
 
 export default function Swipes(props) {
+  
+
   const deck = {
     overflow: "hidden",
     heigth: "700px",
     width: "700px",
   };
+
   const cards = () => {
     let data = [];
     let zIndex = 0
@@ -30,6 +34,8 @@ export default function Swipes(props) {
     }
     return data;
   };
+
+
   const [yesbin, setYesbin] = useState([
     { accepts: [ItemTypes.RESTAURANT], lastDroppedItem: null },
   ]);
@@ -44,13 +50,17 @@ export default function Swipes(props) {
   function yesIsDropped(boxName) {
     return yesBoxNames.indexOf(boxName) > -1;
   }
+
   const [droppedBoxNames, setDroppedBoxNames] = useState([]);
   function isDropped(boxName) {
     return droppedBoxNames.indexOf(boxName) > -1;
   }
+
+
   const handleDrop1 = useCallback(
     (index, item) => {
       const { name } = item;
+      console.log('Added something to the yesBox')
       setYesBoxNames(
         update(yesBoxNames, name ? { $push: [name] } : { $push: [] })
       );
@@ -66,7 +76,8 @@ export default function Swipes(props) {
     },
     [yesBoxNames, yesbin]
   );
-  console.log(yesBoxNames);
+
+
   const handleDrop2 = useCallback(
     (index, item) => {
       const { name } = item;
@@ -137,3 +148,5 @@ export default function Swipes(props) {
     </Container>
   );
 }
+
+

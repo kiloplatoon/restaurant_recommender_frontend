@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Main from './pages/Main'
+import Match from './pages/Match'
 import NavComponent from './components/NavComponent'
 
 
@@ -23,7 +24,6 @@ const App = () => {
 
   const getLoggedInUser = async () => {
     let token = localStorage.getItem('dinnr-token')
-    console.log(token)
     if (token !== 'null' && token !== 'undefined') {
       console.log('token: ', token)
       let res = await UserAPI.getLoggedInUser(token)
@@ -124,6 +124,17 @@ const App = () => {
     )
   }
 
+  const renderMatch = () => {
+    return(
+      <Match 
+      isLoggedIn={isLoggedIn}
+      user={user}
+      handleLogout={handleLogout}
+      getLoggedInUser={getLoggedInUser}
+      />
+    )
+  }
+
   return (
     <div className="App">
       <div className='container-fluid' id='appBG'>
@@ -134,10 +145,11 @@ const App = () => {
           handleLogout={handleLogout}
           />
         </div>
-        <Route exact path='/home' render={renderHome} />
+        <Route exact path='/' render={renderHome} />
         <Route exact path='/login' render={renderLogin} />
         <Route exact path='/signup' render={renderSignup} />
         <Route exact path='/start' render={renderMain} />
+        <Route exact path='/match' render={renderMatch} />
       </Router>
       </div>
     </div>

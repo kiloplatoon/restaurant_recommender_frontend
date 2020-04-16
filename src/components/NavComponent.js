@@ -8,11 +8,11 @@ const NavComponent = ({isLoggedIn, handleLogout}) => {
     <div className='container'>
       <Navbar expand='md' id='navbar'>
         <Navbar.Brand style={{color: '#fff'}} id='nav-brand'>
-          <Link to='/home' style={{color: '#fff'}}>Dinnr</Link>
+          <Link to='/' style={{color: '#fff'}}>Dinnr</Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='mr-auto justify-content-end'>
+          <Nav className='ml-auto justify-content-end'>
             {
               !isLoggedIn ?
               <Navbar.Text style={{color: '#fff'}}>

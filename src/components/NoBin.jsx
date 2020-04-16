@@ -1,6 +1,7 @@
 import React from "react";
 import { useDrop } from "react-dnd";
 const style = {
+  display: 'block',
   height: "15rem",
   width: "12rem",
   margin: "1rem",
@@ -32,7 +33,7 @@ const NoBin = ({ accept, lastDroppedItem, onDrop }) => {
     <div ref={drop} className="ynBox" style={{ ...style, backgroundColor }}>
       {isActive ? "Release" : "No"}
 
-      {lastDroppedItem && <span>&nbsp;Okay!</span>}
+      {lastDroppedItem && <div>&nbsp;Okay!</div>}
     </div>
   );
 };

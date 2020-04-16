@@ -9,7 +9,7 @@ const Login = (props) => {
       {
       props.isLoggedIn
       ?
-      <Redirect to='/home' />
+      <Redirect to='/' />
       :
       <div className='authForm'>
         <h3>Login</h3>
